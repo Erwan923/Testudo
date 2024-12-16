@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testudo-network
+  labels:
+    app: testudo
+    component: network
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testudo
+      component: network
+  template:
+    metadata:
+      labels:
+        app: testudo
+        component: network
+    spec:
+      containers:
+      - name: network
+        image: testudo/network:latest
+        env:
+        - name: COORDINATOR_URL
+          value: http://testudo-coordinator:8080
+        ports:
+        - containerPort: 8082
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN", "NET_RAW"]

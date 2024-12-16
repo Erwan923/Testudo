@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testudo-coordinator
+  labels:
+    app: testudo
+    component: coordinator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testudo
+      component: coordinator
+  template:
+    metadata:
+      labels:
+        app: testudo
+        component: coordinator
+    spec:
+      containers:
+      - name: coordinator
+        image: testudo/coordinator:latest
+        env:
+        - name: GPT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: testudo-secrets
+              key: gpt-api-key
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: testudo-config

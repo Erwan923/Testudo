@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: testudo-config
+data:
+  config.yaml: |
+    modules:
+      osint:
+        enabled: true
+        max_threads: 5
+      network:
+        enabled: true
+        max_scan_rate: 1000
+      web:
+        enabled: true
+        max_concurrent: 3
