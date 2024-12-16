@@ -2,19 +2,21 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Installation des dépendances système
+# Installation des outils OSINT
 RUN apt-get update && apt-get install -y \
-    curl \
+    whois \
+    dig \
     && rm -rf /var/lib/apt/lists/*
 
 # Installation des dépendances Python
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copie des fichiers du projet
-COPY src/ /app/src/
-COPY config/ /app/config/
+# Installation de TheHarvester
+RUN pip install theHarvester
+
+COPY src/modules/osint/ /app/osint/
 
 ENV PYTHONPATH=/app
 
-CMD ["python", "/app/src/main.py"]
+CMD ["python", "/app/osint/service.py"]
