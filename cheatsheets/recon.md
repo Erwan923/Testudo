@@ -1,1 +1,17 @@
-IyBSZWNvbm5haXNzYW5jZSBJbml0aWFsZQoKIyMgSW5pdGlhbCBTY2FuCmBubWFwIC1zbiB7dGFyZ2V0fWAKYG5tYXAgLXNTIC1zViAtUG4ge3RhcmdldH1gCgojIyBTZXJ2aWNlIEVudW1lcmF0aW9uCmBlbnVtNGxpbnV4IC1hIHt0YXJnZXR9YApgbmlrdG8gLWgge3RhcmdldH1gCgojIyBQb3J0IFNjYW5uaW5nCmBubWFwIC1wLSAtVDQge3RhcmdldH1gCmBtYXNzY2FuIC1wMS02NTUzNSB7dGFyZ2V0fSAtLXJhdGU9MTAwMGAKCiMgQW5hbHlzZSBkZSBWdWxuw6lyYWJpbGl0w6lzCgojIyBCYXNpYyBWdWxuIFNjYW4KYG5tYXAgLS1zY3JpcHQgdnVsbiB7dGFyZ2V0fWAKYG5tYXAgLS1zY3JpcHQgc2FmZSB7dGFyZ2V0fWAKCiMjIFNlcnZpY2UgU3BlY2lmaWMKYHNtYmNsaWVudCAtTCB7dGFyZ2V0fWAKYHNob3dtb3VudCAtZSB7dGFyZ2V0fWA=
+# Initial Reconnaissance
+
+`nmap -sn {target}`
+`nmap -sS -sV -Pn {target}`
+`masscan -p1-65535 {target} --rate=1000`
+
+# Service Enumeration
+
+`enum4linux -a {target}`
+`nikto -h {target}`
+`nmap -p- --script vuln {target}`
+
+# Intelligence Gathering
+
+`dig {target}`
+`whois {target}`
+`theHarvester -d {target} -l 500 -b all`
